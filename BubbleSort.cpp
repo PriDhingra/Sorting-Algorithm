@@ -1,48 +1,42 @@
-#include <iostream>
+#include<iostream>
+#include<vector>
 
-using namespace std; 
+using namespace std;
 
-void bubbleSort(int *arrayToSort) {
-    
-    for(int i = 0;i < 10;i++) {
-        for(int j = 0;j < 10 - i- 1;j++) {
-            if(arrayToSort[j] > arrayToSort[j + 1]) {
-                int temp = arrayToSort[j];
-                arrayToSort[j] = arrayToSort[j + 1];
-                arrayToSort[j + 1] = temp;
+void bubbleSort(vector<int> &vect) {
+    for(int i = 0;i < vect.size();i++) {
+        for(int j = 0;j < vect.size() - 1;j++) {
+            if(vect[j + 1] < vect[j]) {
+                int temp = vect[j];
+                vect[j] = vect[j + 1];
+                vect[j + 1] = temp;
             }
         }
     }
-    
 }
 
-void printArray(int *arrayToPrint) {
+void printVector(vector<int> &vect) {
+    for(int i = 0;i < vect.size();i++) 
+        cout<<vect[i]<<" ";
 
-    for(int i = 0;i < 10;i++) {
-        cout<<arrayToPrint[i]<<" ";
-    }
-    
+    cout<<endl;
 }
 
-int main()
-{
-    int a[10];
-   
-    for(int i = 0;i < 10;i++) {
-        cin>>a[i];
-    }
-    
-    cout<<"Array Before Sorting : ";
-  
-    printArray(a);
-  
-    cout<<"\n\n";
-    
-    bubbleSort(a);
-  
-    cout<<"Array After Sorting : ";
-  
-    printArray(a);
-   
+int main() {
+
+    vector<int> vect;
+    vect.push_back(10);
+    vect.push_back(1);
+    vect.push_back(7);
+    vect.push_back(6);
+    vect.push_back(14);
+    vect.push_back(9);
+
+    cout<<"Before Sorting : ";
+    printVector(vect);
+    bubbleSort(vect);
+    cout<<"After Sorting : ";
+    printVector(vect);
+
     return 0;
 }
