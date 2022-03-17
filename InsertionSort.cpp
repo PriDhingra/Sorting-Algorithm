@@ -1,47 +1,48 @@
-#include <iostream>
+#include<iostream>
+#include<vector>
 
 using namespace std;
 
-void insertionSort(int arrayToSort[]) {
-    for(int i = 1;i < 10;i++) {
-        int key = arrayToSort[i];
-        int j = i - 1;
-        
-        while(j >= 0 && arrayToSort[j] > key) {
-            arrayToSort[j+1] = arrayToSort[j];
-            j--;
+void printVector(vector<int> vect) {
+    for(int i = 0;i < vect.size();i++) {
+        cout<<vect[i]<<" ";
+    } 
+    cout<<"\n";
+}
+
+void insertionSort(vector<int> &vect) {
+    int j = 0;
+    for(int i = 1;i < vect.size();i++) {
+        int k = i;
+        while(k >= j && k-1 >= 0) {
+            // cout<<k<<" "<<k-1<<" "<<j<<endl;
+            if(vect[k] < vect[k - 1]) {
+                int temp = vect[k];
+                vect[k] = vect[k - 1];
+                vect[k - 1] = temp;
+            }
+            k--;
         }
-        arrayToSort[j+1] = key;
     }
-}
 
-void printArray(int arrayToPrint[]) {
-
-    for(int i = 0;i < 10;i++) {
-        cout<<arrayToPrint[i]<<" ";
-    }
     
 }
 
-int main()
-{
-    int a[10];
-   
-    for(int i = 0;i < 10;i++) {
-        cin>>a[i];
-    }
-    
-    cout<<"Array Before Sorting : ";
-  
-    printArray(a);
-  
-    cout<<"\n\n";
-    
-    insertionSort(a);
-  
-    cout<<"Array After Sorting : ";
-  
-    printArray(a);
-   
+int main() {
+    vector<int> vect;
+
+    vect.push_back(4);
+    vect.push_back(3);
+    vect.push_back(7);
+    vect.push_back(1);
+    vect.push_back(9);
+    vect.push_back(2);
+
+    cout<<"Before Sorting : ";
+    printVector(vect);
+    insertionSort(vect);
+    cout<<"After Sorting : ";
+    printVector(vect);
+
     return 0;
 }
