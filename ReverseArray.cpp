@@ -7,10 +7,7 @@ void reverseArray(vector<int> &vect) {
     int start = 0;
     int end = vect.size() - 1;
     while(start < end) {
-        int temp = vect[start];
-        vect[start] = vect[end];
-        vect[end] = temp;
-
+        swap(vect[start], vect[end]);
         start++;
         end--;
     }
