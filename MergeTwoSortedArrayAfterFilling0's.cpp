@@ -27,6 +27,11 @@ void mergeTwoSortedArray(vector<int> &vect1, int m, vector<int> &vect2, int n) {
             end1--;
         }
     }
+
+    while(end2 >= 0) {
+        vect1[end2] = vect2[end2];
+        end2--;
+    }
 }
 
 int main() {
@@ -41,7 +46,7 @@ int main() {
     vect1.push_back(0);
     vect1.push_back(0);
 
-    vect2.push_back(2);
+    vect2.push_back(1);
     vect2.push_back(5);
     vect2.push_back(6);
 
