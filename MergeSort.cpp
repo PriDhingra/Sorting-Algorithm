@@ -1,82 +1,70 @@
-#include <iostream>
+#include<iostream>
 
 using namespace std;
 
-void merge(int *arrayToSort, int start, int mid, int end) {
+void printArray(int *arr, int n) {
+    for(int i = 0; i <= n;i++) 
+        cout<<arr[i]<<" ";
+}
+
+void merge(int *arr, int start, int end, int mid) {
+
+    int leftArrayLength = mid - start + 1;
+    int rightArrayLength = end - mid;
+    int leftArray[leftArrayLength];
+    int rightArray[rightArrayLength];
+
+    for(int i = 0;i < leftArrayLength;i++)
+        leftArray[i] = arr[start + i];
+
+    for(int i = 0; i < rightArrayLength ;i++) 
+        rightArray[i] = arr[mid + i + 1];
     
-    int temp[end-start+1];
-    int i = start;
-    int j = mid + 1;
-    int k = 0;
-    
-    while(i <= mid && j <= end) {
-        if(arrayToSort[i] < arrayToSort[j]) {
-            temp[k] = arrayToSort[i];
-            i++;
-            k++;
+    int temp1 = 0;
+    int temp2 = 0;
+    int temp3 = start;
+
+    while(temp1 < leftArrayLength && temp2 < rightArrayLength) {
+        if(leftArray[temp1] < rightArray[temp2]) {
+            arr[temp3] = leftArray[temp1];
+            temp1++;
         } else {
-            temp[k] = arrayToSort[j];
-            j++;
-            k++;
+            arr[temp3] = rightArray[temp2];
+            temp2++;
         }
+        temp3++;
     }
-    
-    while(i <= mid) {
-        temp[k] = arrayToSort[i];
-        i++;
-        k++;
+
+    while(temp1 < leftArrayLength) {
+        arr[temp3] = leftArray[temp1];
+        temp1++;
+        temp3++;
     }
-    
-    while(j <= end) {
-        temp[k] = arrayToSort[j];
-        j++;
-        k++;
+
+    while(temp2 < rightArrayLength) {
+        arr[temp3] = rightArray[temp2];
+        temp2++;
+        temp3++;
     }
-    
-    for(int i = start;i <= end;i++) {
-        arrayToSort[i] = temp[i-start];
-    }
-    
+
 }
 
-void mergeSort(int *arrayToSort, int start, int end) {
-    
-    if(start < end) {
-        int mid = (start + end) / 2;
-        mergeSort(arrayToSort, start, mid);
-        mergeSort(arrayToSort, mid + 1, end);
-        merge(arrayToSort, start, mid, end);
-    }
-    
+void mergeSort(int *arr, int start, int end) {
+    if(start >= end)
+        return;
+
+    int mid = start + (end - start) / 2;
+    mergeSort(arr, start, mid);
+    mergeSort(arr, mid + 1, end);
+
+    merge(arr, start, end, mid); 
 }
 
-void printArray(int arrayToPrint[]) {
+int main() {
+    int arr[] = {38, 27, 43, 3, 9, 82, 10};
 
-    for(int i = 0;i < 10;i++) {
-        cout<<arrayToPrint[i]<<" ";
-    }
-    
-}
+    mergeSort(arr, 0, 6);
+    printArray(arr, 6);
 
-int main()
-{
-    int a[10];
-   
-    for(int i = 0;i < 10;i++) {
-        cin>>a[i];
-    }
-    
-    cout<<"Array Before Sorting : ";
-  
-    printArray(a);
-  
-    cout<<"\n\n";
-    
-    mergeSort(a, 0, 9);
-  
-    cout<<"Array After Sorting : ";
-  
-    printArray(a);
-   
     return 0;
 }
